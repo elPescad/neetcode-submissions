@@ -1,20 +1,17 @@
 class Solution {
 public:
     bool isAnagram(string s, string t) {
-        unordered_map<int, int> mp1;
-        unordered_map<int, int> mp2;
+        unordered_map<int, int> mp;
 
-        for(int i = 0; i < s.size(); i++) {
-            mp1[s[i]-'a']++;
+        for(char c: s) {
+            mp[c]++;
         }
 
-        for(int i = 0; i < t.size(); i++) {
-            mp2[t[i]-'a']++;
+        for(char c: t) {
+            mp[c]--;
+            if(mp[c] == 0) mp.erase(c);
         }
 
-        if(mp1 == mp2) {
-            return true;
-        }
-        return false;
+        return mp.size() == 0;
     }
 };
